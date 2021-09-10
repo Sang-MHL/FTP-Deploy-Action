@@ -2403,7 +2403,7 @@ class FTPSyncProvider {
                 yield this.removeFolder(file.name);
             }
             this.logger.all(`----------------------------------------------------------------`);
-            this.logger.all(`🎉 Sync complete. Saving current server state to "${this.serverPath + this.stateName}"`);
+            this.logger.all(`🎉 Sync complete. Saving current server state to "${this.serverPath + this.stateName}" ___ "${this.localPath}"`);
             if (this.dryRun === false) {
                 yield utilities_1.retryRequest(this.logger, () => __awaiter(this, void 0, void 0, function* () { return yield this.client.uploadFrom(this.localPath + this.stateName, this.stateName); }));
             }
