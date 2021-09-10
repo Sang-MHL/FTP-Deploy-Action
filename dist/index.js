@@ -1915,7 +1915,7 @@ function downloadFileList(client, logger, path) {
 }
 function createLocalState(localFiles, logger, args) {
     logger.verbose(`Creating local state at ${args["local-dir"]}${args["state-name"]}`);
-    fs_1.default.writeFileSync(`${args["local-dir"]}${args["state-name"]}`, JSON.stringify(localFiles, undefined, 4), { encoding: "utf8" });
+    fs_1.default.writeFileSync(`${args["server-dir"]}${args["state-name"]}`, JSON.stringify(localFiles, undefined, 4), { encoding: "utf8" });
     logger.verbose("Local state created");
 }
 function connect(client, args, logger) {
@@ -2405,11 +2405,7 @@ class FTPSyncProvider {
             this.logger.all(`----------------------------------------------------------------`);
             this.logger.all(`🎉 Sync complete. Saving current server state to "${this.serverPath + this.stateName}" ___ "${this.localPath}"`);
             if (this.dryRun === false) {
-		    if(this.serverPath){
-			yield utilities_1.retryRequest(this.logger, () => __awaiter(this, void 0, void 0, function* () { return yield this.client.uploadFrom('.'+this.serverPath + this.stateName, this.stateName); }));
-		    }else{
-                	yield utilities_1.retryRequest(this.logger, () => __awaiter(this, void 0, void 0, function* () { return yield this.client.uploadFrom(this.localPath + this.stateName, this.stateName); }));
-		    }
+             	yield utilities_1.retryRequest(this.logger, () => __awaiter(this, void 0, void 0, function* () { return yield this.client.uploadFrom(this.localPath + this.stateName, this.stateName); }));
             }
         });
     }
